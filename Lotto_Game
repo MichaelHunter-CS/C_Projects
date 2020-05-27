@@ -1,0 +1,313 @@
+/*  
+	Author : Michael Hunter
+	Date : 27-02-2020
+	Student Number : C19365646
+	Compiler : Borland
+	Operating System : Windows 10 
+	
+    Program description : 
+    This program will allow the user to play the Lotto System 6 game. The user is asked to enter their 6 selected 
+    numbers and then the user has a set of options to choose from, each performing a specific requirement. 6 selected
+    numbers are stored in a 1-Dimensional array. Functions and pointer notations to are used during the program.
+    
+	Each of the following functions do the following:
+    1. Read the 6 selected numbers from the keyboard. Perform any necessary validation (error-checking) required (e.g. all numbers must be different, range 1-42, etc.). 
+    2. Display the contents of the 1-D array containing your lotto numbers that you entered. 
+    3. Sort the contents of the array in increasing order (i.e. 1st element = smallest 
+       number, 2nd element = 2nd smallest number, etc.). You may use any sorting algorithm of your choice. 
+    4. Compare your chosen lotto numbers in the 1-D array with the following 
+       winning numbers: 1,3,5,7,9,11 - 42 (Bonus number) 
+    5. Display the frequency of the numbers entered each time the user enters a new 
+       set of numbers (without exiting the program) on the screen. For example, it might display: 
+       number 1 has been selected x times 
+    6. Exit program 
+*/
+
+#include <stdio.h>
+#define SELECTED 6 //part1, part2 and part3 functions
+#define LOTTO 6 // global array for fourth function
+#define SIZE 42 //the size of the lotto numbers
+
+//Declare prototypes
+void part1(int*,int*); //first function, will pass down 2 functions
+void part2(int*); //second function
+void part3(int*); //third function
+void part4(int*, int*);  //fourth function , it will pass down 2 functions to compare
+void part5(int*); //fifth function
+
+main()
+{//start main()
+    
+	
+	char options;
+    int values[SELECTED]; //the array name for user input
+    int array[] = {1,3,5,7,9,11}; //part4 function uses this array
+    //the array element starts at 0 so SIZE +1 will put a number inside element 0
+    int frequency[SIZE+1] = {0};
+    int opt_2_first = 0; //to check if the user picks option 2 in their first try
+    int opt_3_first = 0; //to check if the user picks option 3 in their first try
+    int opt_4_first = 0; //to check if the user picks option 4 in their first try
+    int opt_5_first = 0; //to check if the user picks option 5 in their first try
+    
+	
+    do
+    {//start do loop
+        //Menu
+        printf("\n");
+        printf("*******************************************************\n");
+        printf("\nMenu\n");
+        printf("\n1.)Enter six different numbers to play the Lotto\n");
+        printf("\n2.)Display the six numbers you have selected\n");
+        printf("\n3.)To sort the numbers you have entered\n");
+        printf("\n4.)To compare your six selected numbers with the winning numbers\n");
+        printf("\n5.)Check how many times you have entered the same number\n");
+        printf("\n6.)Game stops \n \n");
+        printf("Please pick one of the options above \n");
+        printf("*******************************************************\n");
+        printf("\n");
+        scanf("%1s", &options);
+        
+		
+        if(options == '1')
+        {//start if
+            //values is the array of numbers that the user has inputted
+            part1(values,frequency);
+            // Makes sure that the user does not pick option 2,3,4 or 5 on their first try but it increments the variable of option 2,3,4 and 5 after option a has finishedand so allows the other options to be executed //
+            opt_2_first++;
+            opt_3_first++;
+            opt_4_first++;
+            opt_5_first++;
+        }//end if
+		else if(options == '2')
+        {//start else if 
+			if(opt_2_first > 0)
+            {//start if
+                part2(values); //values is the array of numbers that the user has inputted
+            }//end if
+			else //if user does enter option b in their first try
+            {//start else
+                printf("ERROR! you cannot pick option 2 in your first try");
+                printf("Please pick option a to input your 6 selected numbers");
+            }//end else
+        }//end else if
+		else if(options == '3')
+        {//start else if
+			if(opt_3_first > 0)
+            {//start if
+                part3(values);
+            }//end if
+			else //if user does enter option c in their first try
+            {//start else
+                printf("ERROR! you cannot pick option 3 in your first try");
+                printf("Please pick option a to input your 6 selected numbers");
+            }//end else
+        }//end else if
+		else if(options == '4')
+        {//start else if
+			if(opt_4_first >0)
+            {//start if
+                part4(array,values);
+            }//end if
+			else //if user does enter option d in their first try
+            {//start else 
+                printf("ERROR! you cannot pick option 4 in your first try");
+                printf("Please pick option a to input your 6 selected numbers");
+            }//end else
+        }//end else if
+        
+		
+        /*Implementation of function 5*/
+        else if(options == '5')
+        {//start else if
+            if(opt_5_first >0)
+            {//start if
+                part5(frequency); // Makes sure that the user does not pick option 5 first but it increments this variable after option 4 has finished and so allows option 2 to be executed //
+            }//end if
+            else
+            {//start else
+                puts("ERROR! you cannot pick option 5 in your first try");
+                puts("Please pick option a to input your 6 selected numbers");
+            }//end else
+        }//end else if           
+        //if the user inputs invalid options and numbers to play the lotto
+        else if(options!='1'&&options!='2'&&options!='3'&&options!='4'&&options!= '5'&&options!='6')
+        {//start else if
+            puts("Invalid input");
+        }//end else if
+    }//end do loop
+	while (options != '6');
+    puts("Thank you for playing this Lotto game");
+    flushall();
+    getchar();
+}//end main()
+
+
+/*Implementation of function part1*/
+/*This functions reads in the 6 lotto numbers that the user has entered*/
+//numbers are the ones that the user has selected for the lotto
+//freq pointer determines how many times a certain number has been inputted
+void part1(int *numbers,int *freq)
+{//start void function part1
+    int i,j;
+    int temp; //a temporary variable is used in order to hold each number that the user has inputted
+    
+	
+    printf("1.) Enter six different numbers to play the Lotto\n");
+    printf("Please enter six different numbers\n");
+    
+	
+    for(i=0; i<SELECTED; i++)
+    {//start for loop   
+        scanf("%d", & *(numbers + i));
+		/* the if statement checks if the user inputs numbers outside the range of 1 - 42 */
+		if (*(numbers + i) >= 1 && *(numbers + i) <= 42)
+        {//start if
+            /*this checks if the user inputs the same number inside the array */
+			for(j=0; j < i;j++)
+            {//start for loop
+                if(*(numbers +i) == *(numbers +j))
+                {//start if
+                    printf("\nYou cannot enter the same number\n");
+                    printf("\nThe game will restart\n");
+                    return; //it returns back to the menu if the user inputs the same number
+                }//end if
+            }//end for loop 
+        }//end if
+        /* the else statement confirms that the user input numbers outside the range of 1 - 42 */
+        else
+        {//start else
+            printf("You must enter numbers within the range of 1-42\n");
+            printf("The program will restart \n");
+            printf("\n"); 
+            break; /*allows the function to be executed again untill user inputs correct numbers */
+        }//end else
+        temp= *(numbers +i);/*outs each number inputted by user into the respective array element */
+        *(freq +temp) = *(freq +temp) +1;/*this gets incremented to determine how many times a certain number has been inputted by the user during the course of the game */
+    }//end for
+}//end void function part1
+
+
+/* Implementation of function part2 */
+/*This function displays the lotto numbers inputted by the user */
+void part2(int *display)
+{//start void function part2
+    int i;
+    
+	
+    printf("2.) Display the six numbers you have selected\n");
+    for(i=0; i<SELECTED; i++)
+    {//start for loop
+        printf("The numbers you have entered are: %d\n", *(display + i));
+    }//end for loop
+}//end void function part2
+
+
+/*Implementation of function part3 */
+/*This function sorts the 6 lotto numbers in ascending order e.g 1,2,3,4..... */
+void part3(int *sort)
+{//start void function part3
+    int min; //looks for the smallest number in the array and places it in the first element
+    int temp; //is used for swapping numbers, just a temporary variable
+    int i,j;
+    
+	
+    //start selection sort
+    /*
+    selection sort looks throughout the array to find the smallest number and sorts it in ascending order 
+    */
+    for(i=0; i<SELECTED-1; i++)
+    {//start for loop
+        min=i;
+        for(j=i+1; j<SELECTED; j++)
+        {//start for loop
+            if(sort[j] < sort[min])
+            {//start if 
+                min = j;
+            }//end if
+        }//end for loop
+        temp = sort[min];
+        sort[min] = sort[min];
+        sort[min] = sort[i];
+        sort[i] = temp;
+    }//end for loop
+    printf("The sorted numbers are: \n");
+    for(i=0; i<SELECTED; i++)
+    {//start for loop
+        printf("%d, ", *(sort + i)); //it aranges the numbers in ascending formation
+    }//end for loop
+}//end void function part3
+
+
+/*Implement function 4 */
+/*this function compares the winning lotto numbers with the user's chosen lotto numbers */
+//compare are winning numbers and values are user input
+void part4(int *compare,int *values)
+{//start void function part4
+    int match = 0; //a counter to see how many matched numbers did the user get
+    int i,j;
+    
+    
+    printf("\n");
+    printf("\n---------------------------------------------------\n");
+    printf("\n| Six matches = JACKPOT!                          |\n");
+    printf("\n| 5 matches = New Car                             |\n");
+    printf("\n| 4 matches = Weekend away                        |\n");
+    printf("\n| 3 matches = Cinema Ticket                       |\n");
+    printf("\n| No matches = No prize                           |\n");
+    printf("\n---------------------------------------------------\n");
+    
+    printf("4.) To compare your six selected numbers with the winning numbers\n");
+    //outer for loop acts like a counter
+    for(i=0; i<LOTTO; i++)
+    {//start for loop
+        for(j=0;j<LOTTO;j++)
+        {//start for loop
+            //inner for loop checks if the values user inputted matches the winning numbers
+            if(*(compare +j) == *(values + i))
+            {//start if 
+                match++;
+                printf("The matching numbers are:winning number %d and your number %d \n",*(compare + j),*(values + i));
+            }//end if
+        }//end for loop
+    }//end for loop
+    /*These determines if the user wins anything */
+    if(match == 6)
+    {//start if
+        printf("Jackpot!");
+    }//end if
+    else if(match == 5)
+    {//start else if
+        printf("You win a new car!");
+    }//end else if
+    else if(match == 4)
+    {//start else if
+        printf("You win a free weekend away");
+    }//end else if
+    else if(match == 3)
+    {//start else if
+        printf("You win a Cinema Ticket");
+    }//end else if
+    else if( match == 2 || match == 1 )
+    {//start else if
+        printf("You didn't win anything");
+    }//end else if
+}//end void function part4
+
+
+/*Implementation of function part5*/
+/*This function keeps track on how many times a particular number has been inputted by the user */
+void part5(int *frequency)
+{//start void function part5
+    int i;
+    
+	
+    printf("e.)Check how many times you have entered the same number\n");
+    for(i=0; i<SIZE+1; i++)
+    {//start for loop
+        //if statement displays how many times a certain number has been inputted 
+        if(*(frequency + i) != 0)
+        {//start if
+            printf("Number %d has been selected %d times \n",i,*(frequency +i));
+        }//end if
+    }//end for loop
+}//end void function part5

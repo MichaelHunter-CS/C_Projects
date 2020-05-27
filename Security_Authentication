@@ -1,0 +1,360 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 11-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    
+    This program is designed to perform security authorisation for It's_Monday_Morning Ltd. based on a four digit passcode.
+    Each empolyee when starting must go through the system doing what it asks before they may start for the company's employer Mr. Monday.
+    Mr. Monday assigned a developer to work on this task before the company re-opens on the 18th of May 2020 due to the lcokdown.
+    Timmy who's a new employee is being walked through the systems AI - MIMI.
+    
+    MIMI has instructed Timmy to take his time as this code shall be used for the time he is with the comapny and how he will know where he placed on monthly performance boards.
+    This is because the code will also be his company identification number.
+    
+    The main menu has 6 options for Timmy to select followed by option 1 having a sub - menu.
+    The following paragraph explains each function in more depth:
+        
+        1) Function 1 will allow the user to either enter their own 4 digit code of have one randomly generated for the user 
+        The user is brought to a sub menu where the user chooses either option 1 or 2
+        Option 1 will allow the user to enter a four digit code manually one digit at a time 
+        After all four digits are entered the users code will appear on screen before returning to the main menu
+        Option 2 will allow the user to receive a random four digit code 
+        If the user wishes to receive a different random four digits code the user simply has to repeat the process of selecting option 1 in the main menu and option 2 in the sub menu
+        
+        2) Function 2 will allow the user to have their unique code encrypted using an encryption algorithm for security purposes such so that others cannot access their data as easily as the user themselves
+        The user enters each digit one at a time such so that no errors can occur
+        The system will then return the users code to them after their origional code is encrypted
+        
+        3) Function 3 will allow the user to match their encrypted code with a default code, the system will then reply with them either matching or not matching
+
+        4) Function 4 will allow the user to decrypt their code
+        The user enters each digit one at a time such so that no errors can occur
+        The system will then return the users origional code to them after their is decrypted
+        
+        5) Function 5 will allow the system to tell the user how many times their encrypted code was entered correctly and incorrectly
+        
+        6) Function 6 will allow the user to exit the system using the exit function
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 4 //SIZE is used for that the length of the multiple arrays doesn't need to be entered manually each time thus being more efficient
+//Declaration of each of the functions
+void fxn1 (int *);
+void fxn2 (int *);
+void increment(int[]);
+void fxn3 (int *);
+void fxn4 (int *);
+void decrement(int[]);
+void fxn5 (int *);
+int main()
+{//start main()
+    char menu_options;
+    int i;
+    int num1;
+    int swap;
+    int move;
+    int swap1;
+    int swap2;
+    int swap3;
+    int move1;
+    int move2;
+    int move3;
+    int counter;
+    int response;
+    int matching;
+    int encryption;
+    int decryption;
+    int code[SIZE];
+    int number[SIZE];
+    int rng_code[SIZE];
+    int user_code[SIZE];
+    int matching_pair[SIZE];
+
+
+    do
+    {//start of do loop - This do loop holds the main menu to which the user can continuously choose 1 of the options and when the user is done entering 6 will end the program
+        //Menu Options
+        printf("\n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n Menu \n");
+        printf("1) Receiving a code \n");
+        printf("2) Encryption of the user's unique code \n");
+        printf("3) Verification of the user's code \n");
+        printf("4) Decryption of the user's code \n");
+        printf("5) Display of the amount of correct and incorrect times the code matches the default code \n");
+        printf("6) Ending of the program \n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n");
+        
+        //This scanf will the users response from the main menu and based on their input a certain function will be activated 
+        scanf("%1s", &menu_options);
+       
+        if(menu_options == '1')
+        {//start function 1
+            //Calling of function 1 
+            fxn1 (&num1);
+        }//end function 1
+
+        if(menu_options == '2')
+        {//start function 2
+            //Calling of function 2
+            fxn2 (&encryption);
+        }//end function 2
+        
+        if(menu_options == '3')
+        {//start function 3
+            //Calling of function 3
+            fxn3 (&matching);
+        }//end function 3 
+        
+        if(menu_options == '4')
+        {//start function 4 
+            //Calling of function 4
+            fxn4 (&decryption);
+        }//end function 4
+        
+        if(menu_options == '5')
+        {//start function 5
+            //Calling of function 5
+            fxn5 (&counter);
+        }//end function 5
+        
+        if(menu_options == '6')
+        {//start function 6
+            printf("Thank you and have a wonderful first day at It's_Monday_Morning Ltd.");
+            exit(0);
+        }//end function 6
+    }//end do loop
+    while(menu_options != '6');
+}//end main()
+//function 1
+void fxn1 (int *num1)
+{//start of function 1
+    int i;
+    int response;
+    int rng_code[SIZE];
+    int user_code[SIZE];
+    
+
+    do
+    {//start of do loop - This do loop holds the sub menu to which the user can choose 1) to enter their own 4 digit code 1 digit at a time or 2) to receive a random 4 digit number
+        //Sub - menu options
+        printf("\n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n Fxn1 Sub - Menu \n");
+        printf("1) If you want to enter the code please press 1 \n");
+        printf("2) If you want to have a code generated please press 2 \n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n");
+        
+        //This scanf will store the users response from the sub - menu and based on their input the user will either submit their own four digit code of a random four digit code will be assigned to them
+        scanf("%d", &response);
+        //This if statement will ask the user to enter their own 4 digit response and store that in the array user_code
+        if (response == 1)
+        {//start of if statement 
+            printf("The code you have selected will appear after you select the final number \n");
+            printf("Enter a each digit one number at a time then press enter to type in the next number \n");
+            //This for loop stores the user_code one element at a time
+            for (i = 0; i < SIZE; i++)
+            {//start of for loop 
+                scanf("%d", &user_code[i]);
+            }//end of for loop 
+            //This for loop will print the finished 4 digit code before retur the user to the main menu
+            for (i = 0; i < SIZE; i++)
+            {//start of for loop 
+                printf("%d", *(user_code + i));
+            }//end of for loop
+            printf("\nExiting fxn1 sub - menu\n");
+            return main();
+        }//end of if statement 
+        //This if statement will print a random 4 digit code on the user's behalf, if the user isn't satisfied with their random code they can request a new one by repeating the process
+        if (response == 2)
+        {//start of if statement 
+            //This for loop assigns a random number between 0 and 9 to each element in the array rng_code
+            for(i = 0; i < SIZE; i++)
+            {//satrt of for loop 
+                rng_code[i] = rand() % 9 + 0;
+            }//end of for loop 
+            //This for loop prints the users random code on the screen for them before returning to the main menu 
+            for(i = 0; i < SIZE; i++)
+            {//start of for loop 
+                printf("%d", *(rng_code + i));
+            }//end of for loop 
+            printf("\nIf you wish to be given a new code please repeat the process until you are satisfied");
+            printf("\nExiting fxn1 sub - menu\n");
+            return main();
+        }//end of if statement 
+    }//end of do loop
+    while(response != '2');
+}//end of function 1
+//function 2
+void fxn2 (int *encryption)
+{//start of function 2
+    int i;
+    int swap;
+    int swap1;
+    int swap2;
+    int swap3;
+    int code[SIZE];
+    
+    
+    printf("Please enter your individual code one number at a time, then press enter before entering another digit\n");
+    //This for loop stores the user's code from function 1 into the array code
+    for(i = 0; i < SIZE; i++)
+    {//start for loop
+         scanf("%d", &*(code + i));
+    }//end for loop
+    //The encryption process to the array code starts by storing each element in to array code with a temporary variable
+    //The element stored in the temporary variables is then re-assigned to a different location in the array code
+    swap = code[0];
+    swap1 = code[2];
+    swap2 = code[1];
+    swap3 = code[3];
+    code[2] = swap;
+    code[0] = swap1;
+    code[3] = swap2;
+    code[1] = swap3;
+    //Calling of the sub - function increment 
+    increment(code);
+    //This for loop prints the newly encrypted code for the user 
+    for(i = 0; i < SIZE; i++)
+    {//start for loop
+        printf("%d", *(code + i));
+    }//end for loop
+    //After the user's code has been encypted for security purposes the user will then be brought to the main menu
+    printf("\nExiting fxn2\n");
+    return main();
+}//end of function 2 
+//function increment
+void increment(int code[])
+{//start of function increment 
+    int i;
+    
+    
+    //This for loop alters values in array in fxn2 by incrementing each of the re-assigned element in the array code by 1 
+    //The final encrypted code is then returned to fxn2 for the user to see their encrypted code 
+    for (i = 0; i < SIZE; i++)
+    {//start for loop
+      code[i]++;
+    }//end for loop
+}//end of functino increment 
+//function 3
+void fxn3 (int *matching)
+{//start of function 3 
+    int i;
+    int matching_pair[SIZE];
+    int access_code[SIZE] = {4, 5, 2, 3};
+    
+    
+    printf("Please enter your encrpted code\n");
+    //This for loop stores the user's encrypted code into the array matching_pair
+    //This is so that we can see if the user's code matches the dafault encrypted code stored in the array access_code
+    for(i = 0; i < SIZE; i++)
+    {//start for loop
+        scanf("%d", &*(matching_pair + i));
+    }//end for loop
+    //This if statement checks to see if the matching_pair array matches the access_code
+    //If they match the system will notify the user by displaying the message Correct Code entered
+    //If they don't match the system will notify the user by displaying the message Wrong Code entered
+    if(*(access_code) == *(matching_pair))
+    {//start if stetment 
+        printf("Correct Code entered");
+    }//end if statement 
+    else
+    {//start else statement 
+        printf("Wrong Code entered");
+    }//end else statement 
+    //After Correct or Wrong Code entered message has been displayed to the user by the system the user will then be brought back to the main menu 
+    printf("\nExiting fxn3\n");
+    return main();
+}//end of funciton 3
+//function 4
+void fxn4 (int *decryption)
+{//start of function 4 
+    int i;
+    int move;
+    int move1;
+    int move2;
+    int move3;
+    int number[SIZE];
+    
+    
+    printf("Please enter your individual code one number at a time\n");
+    //This for loop stores the user's encrypted code from function 2 into the array number
+    for(i = 0; i < SIZE; i++)
+    {//start for loop
+         scanf("%d", &*(number + i));
+    }//end for loop
+    //The decryption process to the array nummber starts by storing each element in to array number with a temporary variable
+    //The element stored in the temporary variables is then re-assigned to a different location in the array number
+    move = number[0];
+    move1 = number[2];
+    move2 = number[1];
+    move3 = number[3];
+    number[2] = move;
+    number[0] = move1;
+    number[3] = move2;
+    number[1] = move3;
+    //Calling of the fucntion decrement 
+    decrement(number);
+    //This for loop prints the newly decrypted code for the user
+    for(i = 0; i < SIZE; i++)
+    {//start for loop
+        printf("%d", *(number + i));
+    }//end for loop
+    //After the user's code has been decypted for security purposes the user will then be brought to the main menu
+    printf("\nExiting fxn4\n");
+    return main();
+}//end of function 4 
+//function increment
+void decrement(int number[])
+{//start of function decrement 
+    int i;
+    
+    
+    //This for loop alters values in array in fxn4 by decrementing each of the re-assigned element in the array number by 1 
+    //The final decrypted code is then returned to fxn4 for the user to see their decrypted code 
+    for (i = 0; i < SIZE; i++)
+    {//start for loop
+      number[i]--;     
+    }//end for loop 
+}//end of function decrement 
+void fxn5(int *counter)
+{//start of function 5 
+    //This structure struct code_counter is supposed to store how many times the user has attempted to match their encrypted code with the access_code from function 3
+    //This is done by using the following structure template and using the member attempts
+    struct code_counter
+    {
+        int number;
+        int wrong_code;
+        int correct_code;
+    };
+    
+    //Defining the variables having the type struct code_counter
+    struct code_counter attempts;
+    
+    int i;
+    
+    
+    //The system then asks the user to recall how many attemtps it took them for their encrypted code to match with the access code for analysis purposes 
+    //The system then stores these findings into the structure code_counter
+    printf("Attempts that the user has entered their encrypted code:");
+    scanf("%d", &attempts.number);
+    printf("Correct_code:");
+    scanf("%d", &attempts.correct_code);
+    printf("Wrong_code:");
+    scanf("%d", &attempts.wrong_code);
+    
+    //Displaying the values of correct_code
+    printf("The correct code was entered %d times\n", attempts.correct_code);
+    
+    //Displaying the values of wrong_code
+    printf("The wrong code was entered %d times\n", attempts.wrong_code);
+    //After the data is analysed the user will then be brought to the main menu
+    printf("\nExiting fxn5\n");
+    return main();
+}
