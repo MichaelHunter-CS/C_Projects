@@ -1,0 +1,44 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 28-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    This program takes two numbers that the user has chosen, the program then calculates two things that the user is looking for:
+    1). GCD - Greatest Common Divisor 
+    2). LCM - Lowest Common Multiple
+*/
+#include <stdio.h>
+int main()
+{
+    int GCD;
+    int LCM;
+    int num1;
+    int num2;
+    int temp1;
+    int temp2;
+    int modulus;
+    
+    
+    printf("Please enter two numbers\n");
+    scanf("%d%d", &num1, &num2);
+    //temp1 and temp2 serve the purpose of storing the data of the two numbers that the users wishes to find the GCD and LCM of.
+    temp1 = num1;
+    temp2 = num2;
+    //This while loop takes uses a swapping algorithm so that none of the data is lost between calculations 
+    //After the GCD is found it is then into temp1 which in turn is stored in the integer GCD
+    while(temp2 != 0)
+    {//start of while loop 
+        modulus = temp1 % temp2;
+        temp1 = temp2;
+        temp2 = modulus;
+    }//end of while loop 
+    GCD = temp1;
+    LCM = (num1 * num2) / GCD;
+    printf("The GCD is %d\n", GCD);
+    printf("The LCM of %d", LCM);
+
+    return 0;
+}
