@@ -1,0 +1,210 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 28-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    The user needs to roll a particular die in the game Dungeons & Dragons, however the user has left their set of dice in their room.
+    This program serves that same function as rolling the die.
+    Through the means of a menu, the user selects which die they wish to roll and the program will return a random number that you'd expect from the die itself.
+*/
+#include<stdio.h>
+#include<stdlib.h>
+//Declaration of each of the functions
+void fxn1 (int *);
+void fxn2 (int *);
+void fxn3 (int *);
+void fxn4 (int *);
+void fxn5 (int *);
+void fxn6 (int *);
+int main()
+{//start main()
+    char menu_options;
+    int i;
+    int die20;
+    int die12;
+    int die10;
+    int die8;
+    int die6;
+    int die4;
+
+
+    do
+    {//start of do loop - This do loop holds the main menu to which the user can continuously choose 1 of the options and when the user is done entering 6 will end the program
+        //Menu Options
+        printf("\n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n Menu \n");
+        printf("1)  To select a D20\n");
+        printf("2)  To select a D12\n");
+        printf("3)  To select a D10\n");
+        printf("4)  To select a D8\n");
+        printf("5)  To select a D6\n");
+        printf("6)  To select a D4\n");
+        printf("7) Ending of the program \n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n");
+        
+        //This scanf will the users response from the main menu and based on their input a certain function will be activated 
+        scanf("%1s", &menu_options);
+       
+        if(menu_options == '1')
+        {//start function 1
+            //Calling of function 1 
+            fxn1 (&die20);
+        }//end function 1
+
+        if(menu_options == '2')
+        {//start function 2
+            //Calling of function 2
+            fxn2 (&die12);
+        }//end function 2
+        
+        if(menu_options == '3')
+        {//start function 3
+            //Calling of function 3
+            fxn3 (&die10);
+        }//end function 3 
+        
+        if(menu_options == '4')
+        {//start function 4 
+            //Calling of function 4
+            fxn4 (&die8);
+        }//end function 4
+        
+        if(menu_options == '5')
+        {//start function 5
+            //Calling of function 5
+            fxn5 (&die6);
+        }//end function 5
+        
+        if(menu_options == '6')
+        {//start function 6
+            //Calling of function 6
+            fxn5 (&die4);
+        }//end function 6
+        
+        if(menu_options == '7')
+        {//start function 7
+            printf("Thank you and have fun.");
+            exit(0);
+        }//end function 7
+    }//end do loop
+    while(menu_options != '7');
+}//end main()
+//function 1
+void fxn1 (int *die20)
+{//start of function 1
+    int i; 
+    int roll20;
+    int input1;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input1);
+    for(i = 0; i < input1; i++)
+    {
+        roll20 = (rand() % 20) + 1;
+        printf("%d\n", roll20);
+    }
+    
+    printf("\nExiting fxn1\n");
+    return main();
+}//end of function 1
+
+//function 2
+void fxn2 (int *die12)
+{//start of function 2
+    int i; 
+    int roll12;
+    int input2;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input2);
+    for(i = 0; i < input2; i++)
+    {
+        roll12 = (rand() % 12) + 1;
+        printf("%d\n", roll12);
+    }
+    printf("\nExiting fxn2\n");
+    return main();
+}//end of function 2 
+
+//function 3
+void fxn3 (int *die10)
+{//start of function 3 
+    int i; 
+    int roll10;
+    int input3;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input3);
+    for(i = 0; i < input3; i++)
+    {
+        roll10 = (rand() % 10) + 1;
+        printf("%d\n", roll10);
+    }
+    printf("\nExiting fxn3\n");
+    return main();
+}//end of funciton 3
+
+//function 4
+void fxn4 (int *die8)
+{//start of function 4 
+    int i; 
+    int roll8;
+    int input4;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input4);
+    for(i = 0; i < input4; i++)
+    {
+        roll8 = (rand() % 8) + 1;
+        printf("%d\n", roll8);
+    }
+    printf("\nExiting fxn4\n");
+    return main();
+}//end of function 4 
+
+//function 5
+void fxn5(int *die6)
+{//start of function 5 
+    int i; 
+    int roll6;
+    int input5;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input5);
+    for(i = 0; i < input5; i++)
+    {
+        roll6 = (rand() % 6) + 1;
+        printf("%d\n", roll6);
+    }
+    printf("\nExiting fxn5\n");
+    return main();
+}//end of function 5
+
+//function 6
+void fn6(int *die4)
+{//start of function 6
+    int i; 
+    int roll4;
+    int input6;
+    
+    
+    printf("Enter how many times do you want the die rolled?");
+    scanf("%d", &input6);
+    for(i = 0; i < input6; i++)
+    {
+        roll4 = (rand() % 4) + 1;
+        printf("%d\n", roll4);
+    }
+    printf("\nExiting fxn6\n");
+    return main();
+}//end of function 6
