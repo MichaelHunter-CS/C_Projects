@@ -1,0 +1,140 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 28-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    The user's refridgerator is broken.
+    A repair person arrives and they measure the temperature of the room and fridge but is unable to convert the measurements into Fahrenheit or Celsius depending on where you are located.
+    This program the serves as a measurement convertor for the repair job. 
+    The user firstly chooses which temperature they are looking for.
+    The user the enters the temperature of the fridge followed by the temperature of the room.
+    The program then returns the temperature in the chosen measurement.
+*/
+#include <stdio.h>
+#include<stdlib.h>
+//Declaration of each of the functions
+void fxn1 (float *);
+void fxn2 (float *);
+void fxn3 (float *);
+int main()
+{//start main
+    char menu_options;
+    int i;
+    float Fahrenheit;
+    float Rankin;
+    float Celsius;
+    
+    
+    do
+    {//start of do loop - This do loop holds the main menu to which the user can continuously choose 1 of the options and when the user is done entering 4 will end the program
+        //Menu Options
+        printf("\n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n Menu \n");
+        printf("1)  To select Rankin\n");
+        printf("2)  To select Fahrenheit\n");
+        printf("3)  To select Celsius\n");
+        printf("4) Ending of the program \n");
+        printf("----------------------------------------------------------------------------------------------------------------");
+        printf("\n");
+        
+        //This scanf will the users response from the main menu and based on their input a certain function will be activated 
+        scanf("%1s", &menu_options);
+       
+        if(menu_options == '1')
+        {//start function 1
+            //Calling of function 1 
+            fxn1 (&Rankin);
+        }//end function 1
+
+        if(menu_options == '2')
+        {//start function 2
+            //Calling of function 2
+            fxn2 (&Fahrenheit);
+        }//end function 2
+        
+        if(menu_options == '3')
+        {//start function 3
+            //Calling of function 3
+            fxn3 (&Celsius);
+        }//end function 3 
+
+        if(menu_options == '4')
+        {//start function 4
+            printf("Thank you for doing your job.");
+            exit(0);
+        }//end function 4
+    }//end do loop
+    while(menu_options != '4');
+    return 0;
+}//end main
+//function 1
+void fxn1 (float *Rankin)
+{//start of function 1
+    float fridge_temp1;
+    float room_temp1;
+    float Rankin1;
+    float Rankin2;
+    
+    
+    //The user enters the fridge_temp followed by the room_temp
+    printf("Please enter the fridge_temp\n");
+    scanf("%f", &fridge_temp1);
+    printf("Please enter the room_temp\n");
+    scanf("%f", &room_temp1);
+    //Calculations are then made from the inputted data with the program returning your answer
+    Rankin1 = fridge_temp1 / (room_temp1 - fridge_temp1);
+    Rankin2 = Rankin1 + 459.6;
+    printf("This is the performance of the fridge in %f Rankin\n", Rankin2);
+    //The program then returns to the main menu
+    printf("\nExiting fxn1\n");
+    return main();
+}//end of function 1
+
+//function 2
+void fxn2 (float *Fahrenheit)
+{//start of function 2
+    float fridge_temp;
+    float room_temp;
+    float performance;
+    
+    
+    //The user enters the fridge_temp followed by the room_temp
+    printf("Please enter the fridge_temp\n");
+    scanf("%f", &fridge_temp);
+    printf("Please enter the room_temp\n");
+    scanf("%f", &room_temp);
+    //Calculations are then made from the inputted data with the program returning your answer
+    performance = fridge_temp / (room_temp - fridge_temp);
+    printf("This is the performance of the fridge in %f Fahrenheit\n", performance);
+    //The program then returns to the main menu
+    printf("\nExiting fxn2\n");
+    return main();
+}//end of function 2
+
+//function 3
+void fxn3 (float *Celsius)
+{//start of function 3
+    float fridge_temp2;
+    float room_temp2;
+    float Rankin3;
+    float Celsius1;
+    
+    
+    //The user enters the fridge_temp followed by the room_temp
+    printf("Please enter the fridge_temp\n");
+    scanf("%f", &fridge_temp2);
+    printf("Please enter the room_temp\n");
+    scanf("%f", &room_temp2);
+    //Calculations are then made from the inputted data with the program returning your answer
+    Rankin3 = fridge_temp2 / (room_temp2 - fridge_temp2);
+    Celsius1 = (Rankin3 - 491.67) * 5 / 9;
+    printf("This is the performance of the fridge in %f Celsius\n", Celsius1);
+    //The program then returns to the main menu
+    printf("\nExiting fxn3\n");
+    return main();
+}//end of function 3
+
