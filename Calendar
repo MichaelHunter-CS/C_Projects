@@ -1,0 +1,132 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 29-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    This program serves as a calendar for the user to access.
+    The user is asked what year do they want the calendar to bring up.
+    The calendar then checks whether or not that year is a leap year for the purpose of having an accurate calendar.
+    The final product is then displayed to the user.
+*/
+#include<stdio.h>
+#define TRUE    1
+#define FALSE   0
+int days_in_month[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+char *months[]=
+{
+	" ",
+	"\nJanuary",
+	"\n\nFebruary",
+	"\n\nMarch",
+	"\n\nApril",
+	"\n\nMay",
+	"\n\nJune",
+	"\n\nJuly",
+	"\n\nAugust",
+	"\n\nSeptember",
+	"\n\nOctober",
+	"\ntNovember",
+	"\n\nDecember"
+};
+
+//inputyear stores the year that the user gives the program and then displays that year on the screen
+int inputyear(void)
+{//start of function inputyear
+	int year;
+	
+	
+	printf("Please enter a year\n");
+	scanf("%d", &year);
+	return year;
+}//end of function inputyear
+//determinedaycode takes the year that the user has inputted and splits its into three categories d1, d2 and d3
+//This is so that the correct date is assigned to the correct day.
+int determinedaycode(int year)
+{//start of function determinedaycode
+	int daycode;
+	int d1, d2, d3;
+	
+	
+	d1 = (year - 1.)/ 4.0;
+	d2 = (year - 1.)/ 100.;
+	d3 = (year - 1.)/ 400.;
+	daycode = (year + d1 - d2 + d3) %7;
+	return daycode;
+}//end of function determinedaycode
+//determineleapyear uses the year that the user has inputted so that it can figure out whether or not the year is a leap year or not according to the Gregorian calendar
+int determineleapyear(int year)
+{//start of function determineleapyear
+	if (year % 4 == 0)
+    {//start of if statement 
+        days_in_month[2] = 29;
+        return TRUE;
+    }//end of if statement
+    else if (year % 100 == 0)
+    {//start of else if statement 1
+        days_in_month[2] = 29;
+        return TRUE;
+    }//end of else if statement 1
+    else if (year % 400 == 0)
+    {//start of else if statement 2
+        days_in_month[2] = 29;
+        return TRUE;
+    }//end of else if statement 2
+    else
+    {//start of else statement
+        days_in_month[2] = 28;
+        return FALSE;
+    }//end of else statement
+}//end of function determineleapyear
+//Calendar takes the data from daycode and year to assemble the calendar
+void calendar(int year, int daycode)
+{//start of function calendar
+	int month, day;
+	
+	
+	//This for loop starts by taking each month and adding each day of the week
+	//One by one the dates are added into their correct spot thanks to the day and daycode fuctions
+	for (month = 1; month <= 12; month++)
+	{//start of main for loop
+		printf("%s", months[month]);
+		printf("\n\nSun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+		//Correct the position for the first date
+		for (day = 1; day <= 1 + daycode * 5; day++)
+		{//start of inner for loop 1
+			printf(" ");
+		}//end of inner for loop 1
+		//Print all the dates for one month
+		for (day = 1; day <= days_in_month[month]; day++)
+		{//start of inner for loop 2
+			printf("%2d", day);
+			//Is day before Sat 
+			//Else start next line Sun.
+			if ((day + daycode) % 7 > 0)
+			{//start of if statement
+				printf("   ");
+			}//end of if statement
+			else
+			{//start of else statement
+			    printf("\n ");
+			}//end of else statement
+		}//end of inner for loop 2
+		//Set position for next month
+		daycode = (daycode + days_in_month[month]) % 7;
+	}//end of main for loop
+}//end of functinon calendar
+
+int main(void)
+{//start main
+	int year;
+	int daycode;
+	int leapyear;
+	
+	
+	year = inputyear();
+	daycode = determinedaycode(year);
+	determineleapyear(year);
+	calendar(year, daycode);
+	printf("\n");
+}//end main
