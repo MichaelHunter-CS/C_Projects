@@ -1,0 +1,42 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 29-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    This program will serve the purpose of displaying the multpilication table of the number that the user enteres.
+*/
+#include <stdio.h>
+int main()
+{
+    int i;
+    int j;
+    int number;
+    int number5;
+    
+    
+    //The number that the user enters will display the multpilication table of that number
+    printf("Please enter a number\n");
+    scanf("%d", &number);
+    for (i = 1; i <= number; i++)
+    {//start of for loop 1
+        printf("%5d", i);
+    }//end of for loop 1
+    printf("\n  +");
+    number5 = number * 5;
+    for (i = 0; i <= number5; i++)
+    {//start of for loop 2
+        printf("-");
+    }//end of for loop 2 
+    for (i = 1; i <= number; i++)
+    {//start of outer for loop 
+        printf("\n%2d |", i);
+        for (j = 1; j <= number; j++)
+        {//start of inner for loop 
+            printf("%5d", i*j);
+        }//end of inner for loop 
+    }//end of outer for loop 
+    printf("\n");
+}//end main 
