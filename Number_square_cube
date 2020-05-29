@@ -1,0 +1,37 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+/*
+    Author: Michael Hunter
+    Date of submission: 29-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    This program asks the user to enter a number of their choice.
+    The program the returns the origional number followed by the number ^ 2 followed by the number ^ 3
+*/
+#include <stdio.h>
+int main()
+{//start main 
+    int number;
+    int i;
+    
+    
+    //The user is asked to enter a number to which the user either wanted to know that number ^ 2 or that number ^ 3
+    printf("Please enter a number\n");
+    scanf("%d", &number);
+    printf("Number      Square      Cube\n");
+    printf("-----------------------------\n");
+    for (i = 1; i < number + 1; i++)
+    {//start of for loop 
+        printf("%4d     %4d         %4d\n", i, i * i, i * i * i);
+    }//end of for loop 
+}//end main
+
