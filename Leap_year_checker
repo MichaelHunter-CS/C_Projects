@@ -1,0 +1,42 @@
+/*
+    Author: Michael Hunter
+    Date of submission: 29-05-2020
+    Student Number: C19365646
+    Compiler: Onlinegdb.com
+    Operating System: Windows 10
+
+    Program description:
+    This program is to serve the purpose of checking whether a year is a leap year or not based on the Gregorian calendar.
+    The user simply enters a year of their choosing and based on the Gregorian calendar one of two things will occur:
+    1) The year the user entered is indeed a leap year
+    2) The year the user entered is not a leap year
+*/
+#include <stdio.h>
+int main()
+{//start main 
+    int year;
+    
+    
+    //The user simply enters any year of their choosing
+    printf("Please enter any year\n");
+    scanf("%d", &year);
+    if (year % 4 == 0)
+    {//start of if statement 
+        printf("%d is a leap year\n", year);
+    }//end of if statement
+    else if (year % 100 == 0)
+    {//start of else if statement 1
+        printf("%d is a leap year\n", year);
+    }//end of else if statement 1
+    else if (year % 400 == 0)
+    {//start of else if statement 2
+        printf("%d is a leap year\n", year);
+    }//end of else if statement 2
+    else
+    {//start of else statement
+        printf("%d is not a leap year\n", year);
+    }//end of else statement
+
+    return 0;
+}//end main
+
