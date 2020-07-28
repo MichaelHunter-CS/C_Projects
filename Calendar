@@ -28,7 +28,7 @@ char *months[]=
 	"\n\nAugust",
 	"\n\nSeptember",
 	"\n\nOctober",
-	"\ntNovember",
+	"\nNovember",
 	"\n\nDecember"
 };
 
